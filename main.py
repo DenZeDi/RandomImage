@@ -1,12 +1,21 @@
 import sys
 import os
 from random_image import main
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout, QMessageBox
 
 
 def on_click():
     main()
-    os.system('random_image.png')
+
+    dlg = QMessageBox()
+    dlg.setWindowTitle("Error")
+    dlg.setText("Something went wrong!\nTry to restart the app..")
+
+    if os.path.exists('random_image.png'):
+        os.system('random_image.png')
+    else:
+        dlg.exec()
+        app.exit()
 
 
 class App(QMainWindow):

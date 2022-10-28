@@ -23,7 +23,7 @@ class App(QMainWindow):
 
         layout = QVBoxLayout()
         layout.addWidget(self.label)
-        layout.addWidget(button)
+        layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignHCenter)
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         container = QWidget()
@@ -32,7 +32,13 @@ class App(QMainWindow):
         self.setCentralWidget(container)
 
     def clicked_button(self):
-        correct_flag = main()
+        dlg2 = QMessageBox()
+        dlg2.setWindowTitle("Wait")
+        dlg2.setText("Wait a couple of seconds please!")
+
+        dlg2.exec()
+
+        result = main()
 
         dlg = QMessageBox()
         dlg.setWindowTitle("Error")
@@ -42,14 +48,14 @@ class App(QMainWindow):
         dlg1.setWindowTitle("Error")
         dlg1.setText("Internet connection lost!")
 
-        if correct_flag == 'correct':
+        if result == 'correct':
             pixmap = QPixmap('random_image.png')
             self.label.adjustSize()
             self.label.setPixmap(pixmap)
-        elif correct_flag == 'something':
+        elif result == 'something':
             dlg.exec()
             app.exit()
-        elif correct_flag == 'connection':
+        elif result == 'connection':
             dlg1.exec()
             app.exit()
 

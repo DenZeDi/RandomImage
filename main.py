@@ -1,5 +1,6 @@
 import sys
 from random_image import main
+from convert import convert_to_srgb
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
@@ -9,7 +10,7 @@ class App(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.label = QLabel("Click on the button to see a random picture")
+        self.label = QLabel("Click on the button to see a random picture\nIt will take a couple of second!")
         self.setWindowTitle("My App")
         self.setWindowIcon(QIcon('icon.png'))
         self.setFixedSize(1280, 720)
@@ -49,6 +50,7 @@ class App(QMainWindow):
         dlg1.setText("Internet connection lost!\nCheck connection..")
 
         if result == 'correct':
+            convert_to_srgb('random_image.png')
             pixmap = QPixmap('random_image.png')
             self.label.adjustSize()
             self.label.setPixmap(pixmap)

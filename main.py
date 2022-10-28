@@ -46,7 +46,7 @@ class App(QMainWindow):
 
         dlg1 = QMessageBox()
         dlg1.setWindowTitle("Error")
-        dlg1.setText("Internet connection lost!")
+        dlg1.setText("Internet connection lost!\nCheck connection..")
 
         if result == 'correct':
             pixmap = QPixmap('random_image.png')

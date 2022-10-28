@@ -1,5 +1,4 @@
 import sys
-import os
 from random_image import main
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
@@ -33,18 +32,25 @@ class App(QMainWindow):
         self.setCentralWidget(container)
 
     def clicked_button(self):
-        main()
+        correct_flag = main()
 
         dlg = QMessageBox()
         dlg.setWindowTitle("Error")
         dlg.setText("Something went wrong!\nTry to restart the app..")
 
-        if os.path.exists('random_image.png'):
+        dlg1 = QMessageBox()
+        dlg1.setWindowTitle("Error")
+        dlg1.setText("Internet connection lost!")
+
+        if correct_flag == 'correct':
             pixmap = QPixmap('random_image.png')
             self.label.adjustSize()
             self.label.setPixmap(pixmap)
-        else:
+        elif correct_flag == 'something':
             dlg.exec()
+            app.exit()
+        elif correct_flag == 'connection':
+            dlg1.exec()
             app.exit()
 
 
